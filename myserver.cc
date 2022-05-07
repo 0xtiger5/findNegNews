@@ -88,9 +88,9 @@ bool getUrl()
 			curl_slist_free_all(headers);
 			curl_easy_cleanup(curl);
 		}
-		fclose(fp);
 		return true;
 	}
+	fclose(fp);
 	return false;
 }
 
@@ -100,7 +100,7 @@ std::string genMessage() {
 	std::vector<std::vector<std::string>> result;
 	parse(result);
 
-	ans += "<h1>负面新闻</h1>";
+	/* ans += "<h1>负面新闻</h1>";
 	ans += "来源：<a href=\"https://news.baidu.com/\" target=\"_blank\">百度新闻</a>";
 	ans += "<ol>";
 	for (auto news : result) {
@@ -112,7 +112,19 @@ std::string genMessage() {
 			ans += ("<li><a href=\"" + news[0] + "\" target=\"_blank\">" + news[1] + "</a></li>");
 		}
 	}
-	ans += "</ol>";
+	ans += "</ol>"; */
+
+	ans += "[";
+	for (auto news : result) {
+		double num = judgeEmo(news[1]);
+		if (num < -1) {
+			std::cout << "an error occurred when judgeEmo()" << std::endl;
+		}
+		else if (num < -0.5) {
+			ans += ("{title:" + news[1] + ", url:" + news[0] + "}");
+		}
+	}
+	ans += "]";
 	return ans;
 }
 
