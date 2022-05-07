@@ -11,7 +11,7 @@
 ```shell
 sudo apt-get install openssl libssl-dev cmake git gcc g++ libcurl4-gnutls-dev
 git clone https://github.com/pennyliang/workflow.git
-cd /workflow/ 
+cd ./workflow/ 
 ./configure
 make
 make install
