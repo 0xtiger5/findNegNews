@@ -67,24 +67,18 @@ std::string genMessage() {
     //解析/tmp/get.html文件提取出所有的新闻标题和URL
 	parse(result);
 	
-    //添加标题和来源标注
-	ans += "<h1>负面新闻</h1>";
-	ans += "来源：<a href=\"https://news.baidu.com/\" target=\"_blank\">百度新闻</a>";
-    
-    //有序列表
-	ans += "<ol>";
+	// 构造json格式字符串
+	ans += "[";
 	for (auto news : result) {
-        //对于parse()返回的所有新闻标题使用judgeEmo调用情感API返回一个数值
-        //值小于-1表示出错，小于-0.5表示负面新闻
 		double num = judgeEmo(news[1]);
 		if (num < -1) {
 			std::cout << "an error occurred when judgeEmo()" << std::endl;
 		}
 		else if (num < -0.5) {
-			ans += ("<li><a href=\"" + news[0] + "\" target=\"_blank\">" + news[1] + "</a></li>");
+			ans += ("{title:" + news[1] + ", url:" + news[0] + "}");
 		}
 	}
-	ans += "</ol>";
+	ans += "]";
 	return ans;
 }
 ```
