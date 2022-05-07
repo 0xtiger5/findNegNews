@@ -14,7 +14,7 @@ git clone https://github.com/pennyliang/workflow.git
 cd ./workflow/ 
 ./configure
 make
-make install
+sudo make install
 ```
 
 
