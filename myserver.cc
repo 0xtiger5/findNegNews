@@ -121,7 +121,7 @@ std::string genMessage() {
 			std::cout << "an error occurred when judgeEmo()" << std::endl;
 		}
 		else if (num < -0.5) {
-			ans += ("{title:" + news[1] + ", url:" + news[0] + "}");
+			ans += ("{title:\"" + news[1] + "\", url:\"" + news[0] + "\"}");
 		}
 	}
 	ans += "]";
