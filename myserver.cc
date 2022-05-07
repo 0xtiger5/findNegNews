@@ -135,12 +135,11 @@ void process(WFHttpTask* server_task)
 	resp->append_output_body_nocopy("</title>", 8);
 	resp->append_output_body_nocopy("</head>", 7);
 	resp->append_output_body_nocopy("<html>", 6);
-
 	std::string message = genMessage();
 	// std::cout << message.c_str() << std::endl;
 	resp->append_output_body(message.c_str(), message.length());
-
 	resp->append_output_body_nocopy("</html>", 7);
+
 	/* Set status line if you like. */
 	resp->set_http_version("HTTP/1.1");
 	resp->set_status_code("200");
